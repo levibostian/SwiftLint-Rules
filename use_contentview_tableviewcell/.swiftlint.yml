@@ -1,7 +1,7 @@
 custom_rules:
-  use_contentview_tableviewcell: # rule identifier
-    included: ".*\\.swift" # regex that defines paths to include during linting. optional.
-    name: "UITableViewCell add views to contentView instead of the cell view."
-    regex: "(.+UITableViewCell.+self\\.addSubview)" # matching pattern
-    message: "Add views to contentView for UITableViewCell."
+  use_contentview_tableviewcell: # use `contentView` instead of the `view` property when adding views in TableViewCell subclasses.
+    included: ".*TableViewCell\\.swift" # Only trigger files that end in "TableViewCell.swift"
+    name: "Add subviews to `contentView` instead of the cell's `view`."
+    regex: "^(?!.*?contentView\\.addSubview).*addSubview.*" # matching pattern
+    message: "Are you sure you wanted to call `addSubview` on `self.view`? Did you mean to use the `contentView`?"
     severity: error
